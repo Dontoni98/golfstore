@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { SearchIcon as IconSearch } from "lucide-react"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { SearchIcon as IconSearch } from "lucide-react";
 
 const Search = () => {
-  const [query, setQuery] = useState("")
-  const router = useRouter()
+  const [query, setQuery] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (query.trim()) {
-      router.push(`/search?q=${encodeURIComponent(query)}`)
+      router.push(`/search?q=${encodeURIComponent(query)}`);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="flex items-center">
@@ -32,8 +32,7 @@ const Search = () => {
         Search
       </button>
     </form>
-  )
-}
+  );
+};
 
-export default Search
-
+export default Search;

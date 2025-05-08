@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
-import { User, ShoppingCart } from "lucide-react"
-import Search from "./Search"
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { User, ShoppingCart } from "lucide-react";
+import Search from "./Search";
 
 const Navbar = () => {
-  const [isSticky, setIsSticky] = useState(false)
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 0)
-    }
+      setIsSticky(window.scrollY > 0);
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 mb-32 z-50 bg-black shadow">
@@ -58,12 +58,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
-
-
-
-
-
+export default Navbar;
