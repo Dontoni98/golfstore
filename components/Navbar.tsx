@@ -44,15 +44,25 @@ const Navbar = () => {
           </div>
           <div className="flex items-center justify-center pb-4">
             <div className="flex items-baseline space-x-4">
-              <Link href="/" className="text-gray-300 hover:text-white">
-                Home
+              <Link href="/driver" className="text-gray-300 hover:text-white">
+                Driver
               </Link>
-              <Link href="/about" className="text-gray-300 hover:text-white">
-                About
+              <Link href="/hybrid" className="text-gray-300 hover:text-white">
+                Hybrid
               </Link>
-              <Link href="/contact" className="text-gray-300 hover:text-white">
-                Contact
+              <Link href="/jern" className="text-gray-300 hover:text-white">
+                Jern
               </Link>
+              <Link href="/klaer" className="text-gray-300 hover:text-white">
+                Klær
+              </Link>
+              <Link href="/putter" className="text-gray-300 hover:text-white">
+                Putter
+              </Link>
+              <Link href="/wood" className="text-gray-300 hover:text-white">
+                Wood
+              </Link>
+              
             </div>
           </div>
         </div>
