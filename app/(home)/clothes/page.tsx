@@ -26,7 +26,7 @@ interface ApiResponse {
   last: boolean;
 }
 
-export default function Putter() {
+export default function Clothes() {
   const [product, setProduct] = useState<Product[]>([]); // definerer state-variabel produkt, inneholder tom liste 
   const [loading, setLoading] = useState(true); // brukes kun under innehenting av data, er av boolsk verdi 
 
@@ -35,7 +35,7 @@ export default function Putter() {
       try {
         // Prøver først å hente data fra api-endepunktet
         const res = await fetch(
-          'http://localhost:8080/products/MenuGrid?category=Putter'
+          'http://localhost:8080/products/MenuGrid?category=Klær'
         );
         const json: ApiResponse = await res.json(); // parsrer responsen som JSOn
         setProduct(json.content);
@@ -53,7 +53,7 @@ export default function Putter() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-6">Putter</h1>
+      <h1 className="text-3xl font-bold mb-6">Klær</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {product.map((p) => (
           //Vi gjør kortene klikkbart slik at kunden får sett flere bilder/mer informasjon om produktet

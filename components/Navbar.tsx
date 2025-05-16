@@ -53,7 +53,7 @@ const Navbar = () => {
               <Link href="/jern" className="text-gray-300 hover:text-white">
                 Jern
               </Link>
-              <Link href="/klaer" className="text-gray-300 hover:text-white">
+              <Link href="/clothes" className="text-gray-300 hover:text-white">
                 Klær
               </Link>
               <Link href="/putter" className="text-gray-300 hover:text-white">
