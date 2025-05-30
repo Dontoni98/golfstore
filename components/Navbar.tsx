@@ -37,7 +37,7 @@ const Navbar = () => {
                 <User className="h-6 w-6" />
                 <span className="sr-only">Profile</span>
               </Link>
-              <Link href="/cart" className="text-gray-300 hover:text-white">
+              <Link href="/shoppingCart" className="text-gray-300 hover:text-white">
                 <ShoppingCart className="h-6 w-6" />
                 <span className="sr-only">Shopping Cart</span>
               </Link>
