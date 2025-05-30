@@ -1,14 +1,10 @@
 'use client'
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from 'react';
+import React, {createContext, useContext, useEffect, useState, ReactNode} from 'react';
 import { initKeycloak, keycloak, logout } from '../config/keycloak';
 
+
+// definderer hva en bruker er og hva vi trenger for å lage en bruker
 type User = {
   name?: string;
   email?: string;

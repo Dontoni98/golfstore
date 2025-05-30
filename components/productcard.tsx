@@ -42,13 +42,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
       {/* Make sure the Link href is correctly formatted */}
       <Link href={`/products/${id}`} className="block">
         <CardHeader className="p-0">
-          <div className="relative h-48 w-full">
-            <Image
+          <div className="flex justify-center">
+            <Image 
               src={imageUrl || "/placeholder.svg"}
               alt={title}
-              fill
               className="object-cover"
               unoptimized={imageUrl.startsWith("http")} // Use unoptimized for external images as a fallback
+              width={200}
+              height={200}
+              style={{ objectFit: 'contain' }}
             />
           </div>
         </CardHeader>
