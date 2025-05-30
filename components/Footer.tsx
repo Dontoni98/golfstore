@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-4 text-sm text-gray-400">
-          <p>&copy; 2021 Golf Store</p>
+          <p>&copy; 2025 Golf Store</p>
         </div>
       </div>
     </footer>

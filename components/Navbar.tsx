@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { User, ShoppingCart } from "lucide-react";
 import Search from "./Search";
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -25,14 +26,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="text-xl font-bold text-white">
-              Logo
+            <Link href="/" >
+              <Image  src="/kollegutta.png" alt="Køllegutta Golfshop" width={100} height={80} className="mt-8"/>
             </Link>
             <div className="w-1/2 max-w-md">
               <Search />
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/profile" className="text-gray-300 hover:text-white">
+              <Link href="../sign-in" className="text-gray-300 hover:text-white">
                 <User className="h-6 w-6" />
                 <span className="sr-only">Profile</span>
               </Link>
