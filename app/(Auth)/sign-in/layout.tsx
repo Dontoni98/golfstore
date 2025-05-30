@@ -6,9 +6,9 @@ import type React from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'NavBar with Sticky Search',
-  description: 'A demo of a navigation bar with a sticky search component',
-};
+  title: "NavBar with Sticky Search",
+  description: "A demo of a navigation bar with a sticky search component",
+}
 
 export default function AuthLayout({
   children,

@@ -1,10 +1,11 @@
 "use client";
-
+//const apiUrl = process.env.BASE_URL;
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+//import { addToCart } from "@/actions/shop";
 
 interface Product {
   productId: number;
@@ -85,6 +86,7 @@ export default function ProductDetailPage() {
       </div>
     );
   }
+
 
   return (
     <div className="container mx-auto p-4">
@@ -177,9 +179,8 @@ export default function ProductDetailPage() {
 
               <Button
                 onClick={() =>
-                  alert(
-                    `Added ${quantity} of product ${product.productId} to cart`
-                  )
+                  //addToCart(product.productId, quantity)
+                  alert(`Added ${quantity} of ${product.productName} to cart`)
                 }
                 className="w-full md:w-auto"
               >

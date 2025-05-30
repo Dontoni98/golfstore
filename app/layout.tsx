@@ -7,8 +7,8 @@ import Navbar from "@/components/Navbar"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "NavBar with Sticky Search",
-  description: "A demo of a navigation bar with a sticky search component",
+  title: "Golfstore",
+  description: "work in progress",
 }
 
 export default function RootLayout({
