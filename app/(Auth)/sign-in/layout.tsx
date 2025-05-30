@@ -1,23 +1,23 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import type React from "react" // Added import for React
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { KeycloakProvider } from '../sign-in/provider/KeycloakProvider'; // Juster path
+import type React from 'react';
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Golfstore Auth",
-  keywords: ["Golfstore", "Auth", "Authentication", "Login", "Sign Up"]
+  title: "NavBar with Sticky Search",
+  description: "A demo of a navigation bar with a sticky search component",
 }
 
 export default function AuthLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <main>
-        {children}
-    </main>
-   
-  )
+    <KeycloakProvider>
+      <main className={inter.className}>{children}</main>
+    </KeycloakProvider>
+  );
 }
