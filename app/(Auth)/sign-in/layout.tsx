@@ -5,8 +5,8 @@ import type React from "react" // Added import for React
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "NavBar with Sticky Search",
-  description: "A demo of a navigation bar with a sticky search component",
+  title: "Golfstore Auth",
+  keywords: ["Golfstore", "Auth", "Authentication", "Login", "Sign Up"]
 }
 
 export default function AuthLayout({
