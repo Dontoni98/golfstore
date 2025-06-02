@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Silent Check SSO</title>
+  </head>
+  <body>
+    <script>
+      // Denne filen brukes av Keycloak for å sjekke om brukeren allerede er innlogget,
+      // uten å vise noen visuell redirect eller forstyrre brukeropplevelsen.
+      // Den fungerer ved å laste denne siden som en "usynlig iframe" i bakgrunnen,
+      // og Keycloak bruker den til å sende tilbake innloggingsstatus til appen via postMessage.
+
+      parent.postMessage(location.href, location.origin);
+    </script>
+  </body>
+</html>
