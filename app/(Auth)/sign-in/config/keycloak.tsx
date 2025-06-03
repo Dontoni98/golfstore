@@ -22,6 +22,16 @@ export const initKeycloak = (): Promise<boolean> => {
   if (!isInitialized && keycloak) {
     isInitialized = true;
     return keycloak
+<<<<<<< HEAD
+      .init({ onLoad: 'login-required', checkLoginIframe: false })
+      .then((authenticated) => {
+        console.log('[Keycloak] Authenticated:', authenticated);
+        return authenticated;
+      })
+      .catch((err) => {
+        console.error('[Keycloak] Init failed:', err);
+        isInitialized = false;
+=======
       .init({
         onLoad: 'check-sso',                         // Prøv å sjekke om bruker er logget inn uten å tvinge login
         checkLoginIframe: false,                     // Deaktivert for enkelhet (unngår iframe polling)
@@ -32,6 +42,7 @@ export const initKeycloak = (): Promise<boolean> => {
       .catch((err) => {
         isInitialized = false;                       // Nullstill om det feiler
         console.error('Keycloak init feilet', err);  // Logg feil
+>>>>>>> 771e811aafa143f1f0e18834aa80aa0c8fa64050
         throw err;
       });
   }
@@ -40,7 +51,11 @@ export const initKeycloak = (): Promise<boolean> => {
   return Promise.resolve(keycloak?.authenticated ?? false);
 };
 
+<<<<<<< HEAD
+
+=======
 // Funksjon for å logge ut brukeren
+>>>>>>> 771e811aafa143f1f0e18834aa80aa0c8fa64050
 export const logout = () => {
   keycloak?.logout({ redirectUri: window.location.origin }); 
   // Etter logout blir bruker sendt tilbake til forsiden
