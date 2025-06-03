@@ -1,16 +1,22 @@
 "use client"; // Sørger for at komponenten kjøres på klientsiden (nødvendig for Keycloak og hooks)
 
 import { useEffect, useState } from "react"; // React hooks
-import Link from "next/link";               // For navigasjonslenker
-import Image from "next/image";             // Next.js optimalisert bildekomponent
+import Link from "next/link"; // For navigasjonslenker
+import Image from "next/image"; // Next.js optimalisert bildekomponent
 import { ShoppingCart, User } from "lucide-react"; // Ikoner
-import Search from "./Search";              // Egen søkekomponent
-import keycloak, { logout, initKeycloak } from "@/app/(Auth)/sign-in/config/keycloak"; 
+import Search from "./Search"; // Egen søkekomponent
+import keycloak, {
+  logout,
+  initKeycloak,
+} from "@/app/(Auth)/sign-in/config/keycloak";
 // Import av Keycloak-instans og init/logout-funksjoner
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Om bruker er logget inn
   const [username, setUsername] = useState<string | undefined>(); // Brukernavn (fra token)
+  const [email, setEmail] = useState<string | undefined>(
+    keycloak?.tokenParsed?.email
+  ); // Epost (fra token)
   const [dropdownOpen, setDropdownOpen] = useState(false); // Styrer visning av dropdown-menyen
 
   useEffect(() => {
@@ -20,6 +26,7 @@ const Navbar = () => {
       if (keycloak?.authenticated) {
         setIsAuthenticated(true); // Oppdaterer login-status
         setUsername(keycloak.tokenParsed?.preferred_username ?? "Bruker"); // Henter brukernavn fra token
+        setEmail(keycloak.tokenParsed?.email ?? "Epost"); // Henter epost fra token
       }
     };
     if (typeof window !== "undefined") {
@@ -55,7 +62,7 @@ const Navbar = () => {
             {/* Profil- og handlekurvikon */}
             <div className="flex items-center space-x-4 relative">
               {isAuthenticated ? (
-                // Hvis logget inn: vis dropdown med brukernavn og logg ut
+                // Hvis logget inn: vis dropdown med brukernavn, epost og logg ut
                 <div className="relative">
                   <button
                     onClick={toggleDropdown}
@@ -66,9 +73,11 @@ const Navbar = () => {
                   {dropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
                       <div className="px-4 py-2 text-sm text-gray-700">
-                        Innlogget som <strong>{username}</strong>
+                        Innlogget som: <strong>{username}</strong>
                       </div>
-                      <div className="border-t" />
+                      <div className="px-4 py-2 text-sm text-gray-700 border-t">
+                        Epost: <strong>{email}</strong>
+                      </div>
                       <button
                         onClick={logout}
                         className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
@@ -90,7 +99,10 @@ const Navbar = () => {
               )}
 
               {/* Handlekurv-ikon */}
-              <Link href="/shoppingCart" className="text-gray-300 hover:text-white">
+              <Link
+                href="/shoppingCart"
+                className="text-gray-300 hover:text-white"
+              >
                 <ShoppingCart className="h-6 w-6" />
                 <span className="sr-only">Shopping Cart</span>
               </Link>
@@ -115,4 +127,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

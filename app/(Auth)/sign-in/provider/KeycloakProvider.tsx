@@ -1,8 +1,14 @@
-'use client'
+"use client";
 
-import React, {createContext, useContext, useEffect, useState, ReactNode} from 'react';
-import { initKeycloak, keycloak, logout } from '../config/keycloak';
-
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import { initKeycloak, logout } from "../config/keycloak";
+import keycloak from "../config/keycloak";
 
 // definderer hva en bruker er og hva vi trenger for å lage en bruker
 type User = {
@@ -34,7 +40,7 @@ export const KeycloakProvider: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState<User>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       initKeycloak()
         .then((auth) => {
           setAuthenticated(auth);
@@ -46,7 +52,7 @@ export const KeycloakProvider: React.FC<Props> = ({ children }) => {
           }
           setInitialized(true);
         })
-        .catch((err) => console.error('Failed to initialize Keycloak', err));
+        .catch((err) => console.error("Failed to initialize Keycloak", err));
     }
   }, []);
 
