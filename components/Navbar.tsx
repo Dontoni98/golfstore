@@ -111,11 +111,19 @@ const Navbar = () => {
 
           {/* Kategori-lenker under */}
           <div className="flex items-center justify-center pb-4">
-            <div className="flex items-baseline space-x-4 text-gray-300 hover:text-white">
-              <Link href="/golfclubs">Golfkøller</Link>
-              <Link href="/clothes">Klær og sko</Link>
-              <Link href="/bag">Bagger</Link>
-              <Link href="/accessories">Tilbehør</Link>
+            <div className="flex items-baseline space-x-4">
+              <Link href="/golfclubs" className="text-gray-300 hover:text-white">
+                Golfkøller
+              </Link>
+              <Link href="/clothes" className="text-gray-300 hover:text-white">
+                Klær og sko
+              </Link>
+              <Link href="/bag" className="text-gray-300 hover:text-white">
+                Bagger
+              </Link>
+              <Link href="/accessories" className="text-gray-300 hover:text-white">
+                Tilbehør
+              </Link>
             </div>
           </div>
         </div>
