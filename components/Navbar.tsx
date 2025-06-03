@@ -1,48 +1,68 @@
-"use client"; // Sørger for at komponenten kjøres på klientsiden (nødvendig for Keycloak og hooks)
+"use client";
 
-import { useEffect, useState } from "react"; // React hooks
-import Link from "next/link"; // For navigasjonslenker
-import Image from "next/image"; // Next.js optimalisert bildekomponent
-import { ShoppingCart, User } from "lucide-react"; // Ikoner
-import Search from "./Search"; // Egen søkekomponent
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ShoppingCart, User } from "lucide-react";
+import Search from "./Search";
 import keycloak, {
   logout,
   initKeycloak,
 } from "@/app/(Auth)/sign-in/config/keycloak";
-// Import av Keycloak-instans og init/logout-funksjoner
 
 const Navbar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Om bruker er logget inn
-  const [username, setUsername] = useState<string | undefined>(); // Brukernavn (fra token)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState<string | undefined>();
   const [email, setEmail] = useState<string | undefined>(
     keycloak?.tokenParsed?.email
-  ); // Epost (fra token)
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Styrer visning av dropdown-menyen
+  );
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null); // dropdown som er åpen
+
+  const categoryRef = useRef<HTMLDivElement>(null); // referanse til kategori-container
 
   useEffect(() => {
-    // Kjøres én gang etter første rendering
     const init = async () => {
-      await initKeycloak(); // Initialiserer Keycloak (uten å tvinge login)
+      await initKeycloak();
       if (keycloak?.authenticated) {
-        setIsAuthenticated(true); // Oppdaterer login-status
-        setUsername(keycloak.tokenParsed?.preferred_username ?? "Bruker"); // Henter brukernavn fra token
-        setEmail(keycloak.tokenParsed?.email ?? "Epost"); // Henter epost fra token
+        setIsAuthenticated(true);
+        setUsername(keycloak.tokenParsed?.preferred_username ?? "Bruker");
+        setEmail(keycloak.tokenParsed?.email ?? "Epost");
       }
     };
     if (typeof window !== "undefined") {
-      init(); // Sikrer at Keycloak kun kjøres i nettleser (ikke under SSR)
+      init();
     }
   }, []);
 
-  const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev); // Åpne/lukk dropdown når profil-ikon trykkes
+  // Lukker dropdown hvis man klikker utenfor kategoriene
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        categoryRef.current &&
+        !categoryRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleProfileDropdown = () => {
+    setProfileDropdownOpen((prev) => !prev);
+  };
+
+  const toggleDropdown = (category: string) => {
+    setOpenDropdown((prev) => (prev === category ? null : category));
   };
 
   return (
     <nav className="fixed top-0 left-0 right-0 mb-32 z-50 bg-black shadow">
       <div className="container mx-auto px-4">
         <div className="flex flex-col">
-          {/* Øverste linje med logo, søk og ikoner */}
+          {/* Øverste linje */}
           <div className="flex items-center justify-between h-16">
             <Link href="/">
               <Image
@@ -54,23 +74,20 @@ const Navbar = () => {
               />
             </Link>
 
-            {/* Søkefelt i midten */}
             <div className="w-1/2 max-w-md">
               <Search />
             </div>
 
-            {/* Profil- og handlekurvikon */}
             <div className="flex items-center space-x-4 relative">
               {isAuthenticated ? (
-                // Hvis logget inn: vis dropdown med brukernavn, epost og logg ut
                 <div className="relative">
                   <button
-                    onClick={toggleDropdown}
+                    onClick={toggleProfileDropdown}
                     className="text-gray-300 hover:text-white focus:outline-none"
                   >
                     <User className="h-6 w-6" />
                   </button>
-                  {dropdownOpen && (
+                  {profileDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-60 bg-white rounded-md shadow-lg z-50">
                       <div className="px-4 py-2 text-sm text-gray-700">
                         Innlogget som: <strong>{username}</strong>
@@ -88,7 +105,6 @@ const Navbar = () => {
                   )}
                 </div>
               ) : (
-                // Hvis ikke logget inn: vis kun login-knapp
                 <button
                   onClick={() => keycloak?.login()}
                   className="text-gray-300 hover:text-white"
@@ -98,7 +114,6 @@ const Navbar = () => {
                 </button>
               )}
 
-              {/* Handlekurv-ikon */}
               <Link
                 href="/shoppingCart"
                 className="text-gray-300 hover:text-white"
@@ -109,21 +124,107 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Kategori-lenker under */}
-          <div className="flex items-center justify-center pb-4">
-            <div className="flex items-baseline space-x-4">
-              <Link href="/golfclubs" className="text-gray-300 hover:text-white">
+          {/* Kategorier med dropdown på klikk */}
+          <div
+            className="flex items-center justify-center pb-4 space-x-8 relative z-40"
+            ref={categoryRef}
+          >
+            {/* Golfkøller */}
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown("golfclubs")}
+                className="text-gray-300 hover:text-white cursor-pointer"
+              >
                 Golfkøller
-              </Link>
-              <Link href="/clothes" className="text-gray-300 hover:text-white">
+              </button>
+              {openDropdown === "golfclubs" && (
+                <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
+                  <Link href="/driver" className="block px-4 py-2 hover:bg-gray-100">
+                    Driver
+                  </Link>
+                  <Link href="/jern" className="block px-4 py-2 hover:bg-gray-100">
+                    Jernsett
+                  </Link>
+                  <Link href="/putter" className="block px-4 py-2 hover:bg-gray-100">
+                    Puttere
+                  </Link>
+                  <Link href="/wood" className="block px-4 py-2 hover:bg-gray-100">
+                    Wooder
+                  </Link>
+                  <Link href="/hybrid" className="block px-4 py-2 hover:bg-gray-100">
+                    Hybrid
+                  </Link>
+                  <Link href="/golfclubs" className="block px-4 py-2 hover:bg-gray-100">
+                    Alle golfkøller
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Klær og sko */}
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown("clothes")}
+                className="text-gray-300 hover:text-white cursor-pointer"
+              >
                 Klær og sko
-              </Link>
-              <Link href="/bag" className="text-gray-300 hover:text-white">
+              </button>
+              {openDropdown === "clothes" && (
+                <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
+                  <Link href="/clothes" className="block px-4 py-2 hover:bg-gray-100">
+                    Bekledning
+                  </Link>
+                  {/*<Link href="/clothes/pants" className="block px-4 py-2 hover:bg-gray-100">
+                    Bukser
+                  </Link>
+                  <Link href="/clothes/shoes" className="block px-4 py-2 hover:bg-gray-100">
+                    Golfsko
+                  </Link>*/}
+                </div>
+              )}
+            </div>
+
+            {/* Bagger */}
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown("bag")}
+                className="text-gray-300 hover:text-white cursor-pointer"
+              >
                 Bagger
-              </Link>
-              <Link href="/accessories" className="text-gray-300 hover:text-white">
+              </button>
+              {openDropdown === "bag" && (
+                <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
+                  <Link href="/bag" className="block px-4 py-2 hover:bg-gray-100">
+                    Bærebagger
+                  </Link>
+                  {/*<Link href="/bag" className="block px-4 py-2 hover:bg-gray-100">
+                    Trillebagger
+                  </Link>*/}
+                </div>
+              )}
+            </div>
+
+            {/* Tilbehør */}
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown("accessories")}
+                className="text-gray-300 hover:text-white cursor-pointer"
+              >
                 Tilbehør
-              </Link>
+              </button>
+              {openDropdown === "accessories" && (
+                <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
+                  <Link href="/accessories" className="block px-4 py-2 hover:bg-gray-100">
+                    Alt tilbehør
+                  </Link>
+                  {/*<Link href="/baller" className="block px-4 py-2 hover:bg-gray-100">
+                    Golfballer
+                  </Link>
+                  <Link href="/hansker" className="block px-4 py-2 hover:bg-gray-100">
+                    Golfhansker
+                  </Link>*/}
+                </div>
+              )}
             </div>
           </div>
         </div>
