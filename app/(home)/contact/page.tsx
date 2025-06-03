@@ -16,7 +16,9 @@ export default function Contact() {
             Klar for golf? Køllegutta hjelper deg!
           </h1>
           <p className="text-xl text-black mb-8 max-w-2xl mx-auto leading-relaxed">
-            Har du spørsmål om golfproduktene våre eller ønsker mer tilpasset hjelp? Ta kontakt med oss - vi hjelper deg gjerne med å forbedre spillet ditt!
+            Har du spørsmål om golfproduktene våre eller ønsker mer tilpasset
+            hjelp? Ta kontakt med oss - vi hjelper deg gjerne med å forbedre
+            spillet ditt!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -74,7 +76,9 @@ export default function Contact() {
       {/* Sosial media seksjon */}
       <section className="py-10 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black">Følg oss på sosiale medier!</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black">
+            Følg oss på sosiale medier!
+          </h2>
           <p className="text-lg text-black mb-6 max-w-2xl mx-auto">
             Vi deler nyheter om utstyr, golf tips og andre |eksklusive tilbud!
           </p>
@@ -99,4 +103,3 @@ export default function Contact() {
     </div>
   );
 }
-

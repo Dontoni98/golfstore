@@ -34,7 +34,7 @@ interface ApiResponse {
   last: boolean;
 }
 
-export default function Clothes() {
+export default function Driver() {
   const [product, setProduct] = useState<Product[]>([]); // definerer state-variabel produkt, inneholder tom liste
   const [loading, setLoading] = useState(true); // brukes kun under innehenting av data, er av boolsk verdi
 
@@ -44,7 +44,7 @@ export default function Clothes() {
       try {
         // Prøver først å hente data fra api-endepunktet
         const res = await fetch(
-          "http://localhost:8080/products/MenuGrid?category=Klær"
+          "http://localhost:8080/products/MenuGrid?category=bag"
         );
         const json: ApiResponse = await res.json(); // parsrer responsen som JSOn
         setProduct(json.content);
@@ -63,7 +63,7 @@ export default function Clothes() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-6">Klær</h1>
+      <h1 className="text-3xl font-bold mb-6">Bagger</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {product.map((p) => (
           //Vi gjør kortene klikkbart slik at kunden får sett flere bilder/mer informasjon om produktet

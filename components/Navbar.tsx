@@ -71,7 +71,7 @@ const Navbar = () => {
                     <User className="h-6 w-6" />
                   </button>
                   {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+                    <div className="absolute right-0 mt-2 w-60 bg-white rounded-md shadow-lg z-50">
                       <div className="px-4 py-2 text-sm text-gray-700">
                         Innlogget som: <strong>{username}</strong>
                       </div>
@@ -112,12 +112,10 @@ const Navbar = () => {
           {/* Kategori-lenker under */}
           <div className="flex items-center justify-center pb-4">
             <div className="flex items-baseline space-x-4 text-gray-300 hover:text-white">
-              <Link href="/driver">Driver</Link>
-              <Link href="/hybrid">Hybrid</Link>
-              <Link href="/jern">Jern</Link>
-              <Link href="/clothes">Klær</Link>
-              <Link href="/putter">Putter</Link>
-              <Link href="/wood">Wood</Link>
+              <Link href="/golfclubs">Golfkøller</Link>
+              <Link href="/clothes">Klær og sko</Link>
+              <Link href="/bag">Bagger</Link>
+              <Link href="/accessories">Tilbehør</Link>
             </div>
           </div>
         </div>
