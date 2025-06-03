@@ -1,23 +1,28 @@
+// Importerer hovedklassen og typen for Keycloak fra keycloak-js
 import Keycloak, { KeycloakInstance } from 'keycloak-js';
 
+// Konfigurasjonsobjekt for Keycloak
 const keycloakConfig = {
-  url: 'http://localhost:8180',
-  realm: 'innloggingbruker',
-  clientId: 'nextjs',
+  url: 'http://localhost:8180',            // URL til Keycloak-serveren
+  realm: 'innloggingbruker',               // Navn på realm i Keycloak
+  clientId: 'nextjs',                      // Client ID registrert i Keycloak for applikasjonen
 };
 
+// Definerer en Keycloak-instans, men bare i nettleser (ikke SSR/server)
 let keycloak: KeycloakInstance | undefined;
 
 if (typeof window !== 'undefined') {
-  keycloak = new Keycloak(keycloakConfig);
+  keycloak = new Keycloak(keycloakConfig); // Lager Keycloak-instans hvis vi er i nettleser
 }
 
-let isInitialized = false;
+let isInitialized = false; // Flag for å unngå å initialisere Keycloak flere ganger
 
+// Funksjon som initialiserer Keycloak (kun én gang)
 export const initKeycloak = (): Promise<boolean> => {
   if (!isInitialized && keycloak) {
     isInitialized = true;
     return keycloak
+<<<<<<< HEAD
       .init({ onLoad: 'login-required', checkLoginIframe: false })
       .then((authenticated) => {
         console.log('[Keycloak] Authenticated:', authenticated);
@@ -26,37 +31,35 @@ export const initKeycloak = (): Promise<boolean> => {
       .catch((err) => {
         console.error('[Keycloak] Init failed:', err);
         isInitialized = false;
+=======
+      .init({
+        onLoad: 'check-sso',                         // Prøv å sjekke om bruker er logget inn uten å tvinge login
+        checkLoginIframe: false,                     // Deaktivert for enkelhet (unngår iframe polling)
+        silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html', 
+        // Spesifiserer hvor Keycloak kan gjøre en "usynlig" redirect for å sjekke login-status
+      })
+      .then((authenticated) => authenticated)        // Returnerer true/false basert på login-status
+      .catch((err) => {
+        isInitialized = false;                       // Nullstill om det feiler
+        console.error('Keycloak init feilet', err);  // Logg feil
+>>>>>>> 771e811aafa143f1f0e18834aa80aa0c8fa64050
         throw err;
       });
   }
+
+  // Hvis allerede initialisert, returner login-status direkte
   return Promise.resolve(keycloak?.authenticated ?? false);
 };
 
+<<<<<<< HEAD
 
+=======
+// Funksjon for å logge ut brukeren
+>>>>>>> 771e811aafa143f1f0e18834aa80aa0c8fa64050
 export const logout = () => {
-  if (keycloak) {
-    keycloak.logout({
-      redirectUri: window.location.origin, // F.eks. http://localhost:3000
-    });
-  }
+  keycloak?.logout({ redirectUri: window.location.origin }); 
+  // Etter logout blir bruker sendt tilbake til forsiden
 };
 
-export const getToken = async (): Promise<string | null> => {
-  if (keycloak) {
-    if (keycloak.isTokenExpired()) {
-      try {
-        await keycloak.updateToken(30);
-      } catch (error) {
-        console.error('Failed to refresh the token', error);
-        keycloak.logout({
-          redirectUri: window.location.origin,
-        });
-        return null;
-      }
-    }
-    return keycloak.token ?? null;
-  }
-  return null;
-};
-
-export { keycloak };
+// Eksporterer instansen så den kan brukes direkte i komponenter
+export default keycloak;
