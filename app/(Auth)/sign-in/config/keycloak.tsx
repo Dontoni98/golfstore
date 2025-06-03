@@ -19,15 +19,19 @@ export const initKeycloak = (): Promise<boolean> => {
     isInitialized = true;
     return keycloak
       .init({ onLoad: 'login-required', checkLoginIframe: false })
-      .then((authenticated) => authenticated)
+      .then((authenticated) => {
+        console.log('[Keycloak] Authenticated:', authenticated);
+        return authenticated;
+      })
       .catch((err) => {
+        console.error('[Keycloak] Init failed:', err);
         isInitialized = false;
-        console.error('Failed to initialize Keycloak', err);
         throw err;
       });
   }
   return Promise.resolve(keycloak?.authenticated ?? false);
 };
+
 
 export const logout = () => {
   if (keycloak) {
