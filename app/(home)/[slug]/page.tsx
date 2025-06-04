@@ -51,7 +51,7 @@ export default function CategoryPage() {
         const res = await fetch(
           `http://localhost:8080/products/MenuGrid?category=${(
             String(slug)
-          )}`
+          )}&sizePerPage=100`
         );
         const json: ApiResponse = await res.json();
         setProducts(json.content);

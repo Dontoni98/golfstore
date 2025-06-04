@@ -171,9 +171,6 @@ const Navbar = () => {
               </button>
               {openDropdown === "clothes" && (
                 <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
-                  <Link href="/Klær og sko" className="block px-4 py-2 hover:bg-gray-100">
-                    Bekledning
-                  </Link>
                   <Link href="/Tshirts" className="block px-4 py-2 hover:bg-gray-100">
                     T-skjorte
                   </Link>
@@ -182,6 +179,12 @@ const Navbar = () => {
                   </Link>
                   <Link href="/Bukse" className="block px-4 py-2 hover:bg-gray-100">
                     Bukse
+                  </Link>
+                  <Link href="/Jakke" className="block px-4 py-2 hover:bg-gray-100">
+                    Jakke
+                  </Link>
+                  <Link href="/Klær og sko" className="block px-4 py-2 hover:bg-gray-100">
+                    Alt innen klær og sko
                   </Link>
                 </div>
               )}
@@ -220,14 +223,14 @@ const Navbar = () => {
               </button>
               {openDropdown === "accessories" && (
                 <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
-                  <Link href="/Tilbehør" className="block px-4 py-2 hover:bg-gray-100">
-                    Alt tilbehør
-                  </Link>
                   <Link href="/Ball" className="block px-4 py-2 hover:bg-gray-100">
                     Golfballer
                   </Link>
                   <Link href="/Hanske" className="block px-4 py-2 hover:bg-gray-100">
                     Golfhansker
+                  </Link>
+                  <Link href="/Tilbehør" className="block px-4 py-2 hover:bg-gray-100">
+                    Alt tilbehør
                   </Link>
                 </div>
               )}
