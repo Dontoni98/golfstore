@@ -139,22 +139,22 @@ const Navbar = () => {
               </button>
               {openDropdown === "golfclubs" && (
                 <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
-                  <Link href="/driver" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Driver" className="block px-4 py-2 hover:bg-gray-100">
                     Driver
                   </Link>
-                  <Link href="/jern" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Jernsett" className="block px-4 py-2 hover:bg-gray-100">
                     Jernsett
                   </Link>
-                  <Link href="/putter" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Putter" className="block px-4 py-2 hover:bg-gray-100">
                     Puttere
                   </Link>
-                  <Link href="/wood" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Wooder" className="block px-4 py-2 hover:bg-gray-100">
                     Wooder
                   </Link>
-                  <Link href="/hybrid" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Hybrid" className="block px-4 py-2 hover:bg-gray-100">
                     Hybrid
                   </Link>
-                  <Link href="/golfclubs" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Golfkøller" className="block px-4 py-2 hover:bg-gray-100">
                     Alle golfkøller
                   </Link>
                 </div>
@@ -171,20 +171,23 @@ const Navbar = () => {
               </button>
               {openDropdown === "clothes" && (
                 <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
-                  <Link href="/clothes" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Klær og sko" className="block px-4 py-2 hover:bg-gray-100">
                     Bekledning
                   </Link>
-                  {/*<Link href="/clothes/pants" className="block px-4 py-2 hover:bg-gray-100">
-                    Bukser
+                  <Link href="/Tshirts" className="block px-4 py-2 hover:bg-gray-100">
+                    T-skjorte
                   </Link>
-                  <Link href="/clothes/shoes" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Sko" className="block px-4 py-2 hover:bg-gray-100">
                     Golfsko
-                  </Link>*/}
+                  </Link>
+                  <Link href="/Bukse" className="block px-4 py-2 hover:bg-gray-100">
+                    Bukse
+                  </Link>
                 </div>
               )}
             </div>
 
-            {/* Bagger */}
+            {/* bagger og traller */}
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("bag")}
@@ -194,12 +197,15 @@ const Navbar = () => {
               </button>
               {openDropdown === "bag" && (
                 <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
-                  <Link href="/bag" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Carrybag" className="block px-4 py-2 hover:bg-gray-100">
                     Bærebagger
                   </Link>
-                  {/*<Link href="/bag" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Trolleybag" className="block px-4 py-2 hover:bg-gray-100">
                     Trillebagger
-                  </Link>*/}
+                  </Link>
+                  <Link href="/bagger og traller" className="block px-4 py-2 hover:bg-gray-100">
+                    Alt innen bagger
+                  </Link>
                 </div>
               )}
             </div>
@@ -214,15 +220,15 @@ const Navbar = () => {
               </button>
               {openDropdown === "accessories" && (
                 <div className="absolute left-0 mt-1 w-48 bg-white text-black rounded shadow-lg z-50">
-                  <Link href="/accessories" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Tilbehør" className="block px-4 py-2 hover:bg-gray-100">
                     Alt tilbehør
                   </Link>
-                  {/*<Link href="/baller" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Ball" className="block px-4 py-2 hover:bg-gray-100">
                     Golfballer
                   </Link>
-                  <Link href="/hansker" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link href="/Hanske" className="block px-4 py-2 hover:bg-gray-100">
                     Golfhansker
-                  </Link>*/}
+                  </Link>
                 </div>
               )}
             </div>
