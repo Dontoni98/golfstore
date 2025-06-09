@@ -54,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </CardHeader>
         <CardContent className="p-4">
           <CardTitle className="text-lg font-semibold mb-2">{title}</CardTitle>
-          <p className="text-gray-600">${price.toFixed(2)}</p>
+          <p className="text-gray-600">NOK{price.toFixed(2)}</p>
         </CardContent>
       </Link>
       <CardFooter className="p-4 pt-0">

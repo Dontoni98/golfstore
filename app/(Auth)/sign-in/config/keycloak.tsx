@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import Keycloak, { KeycloakInstance } from 'keycloak-js';
 
 const keycloakConfig = {
@@ -56,3 +57,44 @@ export const getToken = async (): Promise<string | null> => {
 };
 
 export { keycloak };
+=======
+// keycloak.ts
+
+import Keycloak from "keycloak-js";
+
+const keycloak = new Keycloak({
+  url: "http://localhost:8180", // ← Din Keycloak URL
+  realm: "Golfshop",
+  clientId: "golfstore-backend", // ← Sørg for at dette stemmer
+});
+
+export default keycloak;
+
+export function initKeycloak() {
+  if (typeof window === "undefined") return;
+
+  return keycloak.init({
+    onLoad: "check-sso",
+    checkLoginIframe: false,
+    silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
+  });
+}
+
+export function login() {
+  if (typeof window === "undefined") return;
+
+  console.log("✅ Bruker redirectUri:", window.location.origin);
+
+  keycloak.login({
+    redirectUri: window.location.origin,
+  });
+}
+
+export function logout() {
+  if (typeof window === "undefined") return;
+
+  keycloak.logout({
+    redirectUri: window.location.origin,
+  });
+}
+>>>>>>> Stashed changes

@@ -141,7 +141,7 @@ export default function ProductDetailPage() {
                 {product.brandName}
               </p>
               <p className="text-2xl font-semibold mb-4">
-                ${product.price.toFixed(2)}
+                NOK{product.price.toFixed(2)}
               </p>
               <p className="text-gray-600 mb-6">{product.description}</p>
 
