@@ -8,7 +8,9 @@ import Search from "./Search";
 import keycloak, {
   logout,
   initKeycloak,
+  testDebugEndpoints,
 } from "@/app/(Auth)/sign-in/config/keycloak";
+import test from "node:test";
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,10 +26,25 @@ const Navbar = () => {
   useEffect(() => {
     const init = async () => {
       await initKeycloak();
+      // Sjekker om Keycloak er autentisert
+      console.log("Keycloak token:", keycloak?.token);
+      console.log("Keycloak tokenParsed:", keycloak?.tokenParsed);
+      console.log("Keycloak authenticated:", keycloak?.authenticated);
+      console.log("Keycloak init complete");
+      
       if (keycloak?.authenticated) {
         setIsAuthenticated(true);
         setUsername(keycloak.tokenParsed?.preferred_username ?? "Bruker");
         setEmail(keycloak.tokenParsed?.email ?? "Epost");
+        
+        fetch("http://localhost:8080/user", {
+          method: "GET",
+          headers: { 
+            Authorization: `Bearer ${keycloak.token}`,
+  
+          },
+        })
+
       }
     };
     if (typeof window !== "undefined") {
