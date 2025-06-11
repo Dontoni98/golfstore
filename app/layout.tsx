@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type React from "react";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ScrollToTopButton from "@/components/ScrollToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
         <main className="container mx-auto mt-16 p-4">{children}</main>
+        <Footer />
       </body>
     </html>
   );
