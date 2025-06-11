@@ -49,9 +49,7 @@ export default function CategoryPage() {
 
       try {
         const res = await fetch(
-          `http://localhost:8080/products/MenuGrid?category=${(
-            String(slug)
-          )}&sizePerPage=100`
+          `http://localhost:8080/products/MenuGrid?category=${String(slug)}&sizePerPage=100`
         );
         const json: ApiResponse = await res.json();
         setProducts(json.content);
@@ -78,15 +76,13 @@ export default function CategoryPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold capitalize mb-6">{decodeURIComponent(String(slug))}</h1>
+      <h1 className="text-3xl font-bold capitalize mb-6">
+        {decodeURIComponent(String(slug))}
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((p) => (
-          <Link
-            key={p.productId}
-            href={`/products/${p.productId}`}
-            className="block"
-          >
-            <Card className="max-w-xs hover:shadow-lg transition-shadow">
+          <Card key={p.productId} className="max-w-xs hover:shadow-lg transition-shadow">
+            <Link href={`/products/${p.productId}`}>
               <CardHeader>
                 <CardTitle>{p.productName}</CardTitle>
               </CardHeader>
@@ -111,10 +107,11 @@ export default function CategoryPage() {
                 <span className="font-medium">{p.price} NOK</span>
                 <Button size="sm">Kjøp</Button>
               </CardFooter>
-            </Card>
-          </Link>
+            </Link>
+          </Card>
         ))}
       </div>
     </div>
   );
 }
+
