@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -20,7 +19,6 @@ export default function AuthLayout({
     <main>
       <Navbar />
       <div className="mt-20">{children}</div>
-      <Footer />
     </main>
   );
 }
