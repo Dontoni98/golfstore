@@ -1,6 +1,12 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Youtube as YoutubeIcon, MessageCircle, Phone, Mail, MapPin } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Youtube as YoutubeIcon,
+  MessageCircle,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
 
 const Footer = () => {
   return (
@@ -23,7 +29,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Kontakt oss med ikoner og tekst, bruk av flex for layout */}
           <div>
-            <h3 className="text-3xl font-semibold mb-4 text-green-800">Kontakt oss</h3>
+            <h3 className="text-3xl font-semibold mb-4 text-green-800">
+              Kontakt oss
+            </h3>
             <div className="space-y-3 text-gray-300">
               <div className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 text-green-400" />
@@ -42,7 +50,9 @@ const Footer = () => {
 
           {/* Om oss: Bruker tekst med lenke og litt margin for spacing */}
           <div>
-            <h3 className="text-3xl font-semibold mb-4 text-green-800">Om oss</h3>
+            <h3 className="text-3xl font-semibold mb-4 text-green-800">
+              Om oss
+            </h3>
             <div className="space-y-2 text-gray-300">
               <p>Norges ledende golfbutikk siden 2010</p>
               <p>Vi tilbyr kvalitetsutstyr for alle nivåer</p>
@@ -50,7 +60,10 @@ const Footer = () => {
               <p>Rask levering over hele Norge</p>
               <div className="mt-4">
                 {/* Lenke med hover-effekt*/}
-                <Link href="/about" className="text-green-400 hover:text-green-300 underline">
+                <Link
+                  href="/about"
+                  className="text-green-400 hover:text-green-300 underline"
+                >
                   Les mer om oss →
                 </Link>
               </div>
@@ -59,9 +72,13 @@ const Footer = () => {
 
           {/* Sosiale medier: Ikoner inni sirkler med hovereffekter */}
           <div>
-            <h3 className="text-3xl font-semibold mb-4 text-green-800">Følg oss</h3>
+            <h3 className="text-3xl font-semibold mb-4 text-green-800">
+              Følg oss
+            </h3>
             <div className="space-y-4">
-              <p className="text-gray-300 mb-4">Hold deg oppdatert på våre kanaler</p>
+              <p className="text-gray-300 mb-4">
+                Hold deg oppdatert på våre kanaler
+              </p>
               <div className="flex space-x-4">
                 <a
                   href="https://snapchat.com"
@@ -90,14 +107,22 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-gray-400">
-              <p>&copy; 2025 Køllegutta Golfshop. Alle rettigheter reservert.</p>
+              <p>
+                &copy; 2025 Køllegutta Golfshop. Alle rettigheter reservert.
+              </p>
             </div>
             {/* Lenker til kontakt- og om-oss-side, med hoverfarge for interaksjon */}
             <div className="flex space-x-6 text-sm">
-              <Link href="/contact" className="text-gray-400 hover:text-green-400">
+              <Link
+                href="/contact"
+                className="text-gray-400 hover:text-green-400"
+              >
                 Kontakt
               </Link>
-              <Link href="/about" className="text-gray-400 hover:text-green-400">
+              <Link
+                href="/about"
+                className="text-gray-400 hover:text-green-400"
+              >
                 Om oss
               </Link>
             </div>
@@ -105,7 +130,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

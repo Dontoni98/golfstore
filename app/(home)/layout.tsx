@@ -2,6 +2,8 @@ import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import type React from "react"; // Added import for React
+import Footer from "@/components/Footer";
+import ScrollToTopButton from "@/components/ScrollToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,8 @@ export default function AuthLayout({
     <main>
       <Navbar />
       <div className="mt-20">{children}</div>
+      <Footer />
+      <ScrollToTopButton /> {/* Skal vises på alle "sider" */}
     </main>
   );
 }
