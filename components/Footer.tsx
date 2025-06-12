@@ -36,15 +36,15 @@ const Footer = () => {
               <div className="space-y-3 text-gray-300">
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 mr-3 text-green-400" />
-                  <span>post@kollegutta.no</span>
+                  <span>support@køllegutta.com</span>
                 </div>
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 mr-3 text-green-400" />
-                  <span>+47 123 45 678</span>
+                  <span>+47 4444 4444</span>
                 </div>
                 <div className="flex items-start">
                   <MapPin className="w-5 h-5 mr-3 mt-0.5 text-green-400" />
-                  <span>Golfveien 1, 0123 Oslo</span>
+                  <span>Bredalsveien 14, 3511 Hønefoss</span>
                 </div>
               </div>
             </div>

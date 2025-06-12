@@ -227,7 +227,7 @@ const handleAddItem = async (variantId: number) => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-20">
         <div className="bg-white border border-gray-200 rounded-lg shadow-sm max-w-2xl mx-auto text-center">
           <div className="px-6 py-4 border-b border-gray-200">
             <span className="w-16 h-16 mx-auto mb-4 text-gray-400">🛒</span>

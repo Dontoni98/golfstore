@@ -148,7 +148,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("golfclubs")}
-                className="text-gray-300 hover:text-white cursor-pointer"
+                className="text-gray-300 hover:text-white cursor-pointer transition-transform duration-200 hover:-translate-y-[2px]"
               >
                 Golfkøller
               </button>
@@ -180,7 +180,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("clothes")}
-                className="text-gray-300 hover:text-white cursor-pointer"
+                className="text-gray-300 hover:text-white cursor-pointer transition-transform duration-200 hover:-translate-y-[2px]"
               >
                 Klær og sko
               </button>
@@ -209,7 +209,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("bag")}
-                className="text-gray-300 hover:text-white cursor-pointer"
+                className="text-gray-300 hover:text-white cursor-pointer transition-transform duration-200 hover:-translate-y-[2px]"
               >
                 Bagger
               </button>
@@ -232,7 +232,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("accessories")}
-                className="text-gray-300 hover:text-white cursor-pointer"
+                className="text-gray-300 hover:text-white cursor-pointer transition-transform duration-200 hover:-translate-y-[2px]"
               >
                 Tilbehør
               </button>
