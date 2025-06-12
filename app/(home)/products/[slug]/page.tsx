@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { updateCartItem } from "@/app/actions/dynamic-cart";
+import { updateCartItem } from "@/app/actions/dynamic-cart"; // Importerer funksjonen for å oppdatere handlekurven, goal was to use dynamic cart but this is a more direct approach for authenticated users
 
 // Grensesnitt for attributter som beskriver en variant (f.eks. størrelse, farge)
 interface VariantAttribute {

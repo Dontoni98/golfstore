@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { fetchCart, updateCartItem, clearCart } from "@/app/actions/dynamic-cart"
+import { fetchCart, updateCartItem, clearCart } from "@/app/actions/auth-shop" // Importing the functions to interact with the cart, the goal was to enable guest shopping with dynamic-cart.ts
 
 
 interface CartItem {
@@ -168,7 +168,7 @@ const handleRemoveItem = async (productId: number, variantId: number) => {
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       // Clear cart after successful order
-      await clearCart()
+       //dont work with auth cart
       setOrderComplete(true)
     } catch (err) {
       setError("Payment failed. Please try again.")
