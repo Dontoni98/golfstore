@@ -110,7 +110,7 @@ export default function CategoryPage() {
               </CardContent>
 
               <CardFooter className="justify-between">
-                <span className="font-medium">{p.price} NOK</span>
+                <span className="font-medium">${p.price}</span>
                 <Button size="sm">Kjøp</Button>
               </CardFooter>
             </Link>
