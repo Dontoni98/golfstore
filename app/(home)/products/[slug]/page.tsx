@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { updateCartItem } from "@/app/actions/auth-shop";
+import { updateCartItem } from "@/app/actions/dynamic-cart";
 
 // Grensesnitt for attributter som beskriver en variant (f.eks. størrelse, farge)
 interface VariantAttribute {
@@ -192,7 +192,7 @@ export default function ProductDetailPage() {
 
                   try {
                     const variantId = selectedVariantId ?? 0;
-                    await updateCartItem(variantId, quantity, "add");
+                    await updateCartItem(productId,variantId,"add");
                     alert(`Added ${quantity} item(s) to cart.`);
                   } catch (err) {
                     console.error("Failed to add to cart:", err);

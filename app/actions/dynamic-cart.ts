@@ -1,4 +1,4 @@
-// app/actions/dynamic-cart.ts
+// dynamic-cart.ts
 import keycloak from "@/app/(Auth)/sign-in/config/keycloak"
 import * as authCart from "./auth-shop"
 import * as guestCart from "./guest-shop"
@@ -10,17 +10,27 @@ export const fetchCart = () => {
 }
 
 export const updateCartItem = (
-  variantId: number,
-  amount: number = 1,
+  productIdOrItem: number | {
+    variantId: number;
+    productId: number;
+    productName: string;
+    price: number;
+    imageUrl: string;
+  },
+  variantId?: number,
   action: "add" | "subtract" | "delete" = "add"
 ) => {
-  return isLoggedIn()
-    ? authCart.updateCartItem(variantId, amount, action)
-    : guestCart.updateCartItem(variantId, amount, action)
+  if (isLoggedIn()) {
+    return authCart.updateCartItem(productIdOrItem as number, variantId!, action)
+  } else {
+    return guestCart.updateCartItem(productIdOrItem as any, action)
+  }
 }
+
 
 export const clearCart = (variantId?: number) => {
   return isLoggedIn()
     ? authCart.clearCart(variantId!)
     : guestCart.clearCart()
 }
+

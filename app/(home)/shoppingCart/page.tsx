@@ -64,6 +64,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     loadCart()
+    console.log(fetchCart())
   }, [])
 
   const loadCart = async () => {
@@ -86,22 +87,21 @@ export default function CheckoutPage() {
   }
 }
 
-const handleRemoveItem = async (variantId: number) => {
+const handleAddItem = async (productId: number, variantId: number) => {
   try {
-    await updateCartItem(variantId, 1, "subtract")
-    await loadCart()
-  } catch (err) {
-    setError(err instanceof Error ? err.message : "Failed to remove item")
-  }
-}
-
-
-const handleAddItem = async (variantId: number) => {
-  try {
-    await updateCartItem(variantId, 1, "add")
+    await updateCartItem(productId, variantId, "add")
     await loadCart()
   } catch (err) {
     setError(err instanceof Error ? err.message : "Failed to add item")
+  }
+}
+
+const handleRemoveItem = async (productId: number, variantId: number) => {
+  try {
+    await updateCartItem(productId, variantId, "subtract")
+    await loadCart()
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "Failed to remove item")
   }
 }
 
@@ -284,12 +284,7 @@ const handleAddItem = async (variantId: number) => {
             <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
               <div className="px-6 py-4 border-b border-gray-200 flex flex-row items-center justify-between">
                 <h3 className="text-lg font-semibold flex items-center gap-2">🛒 Cart Items ({cartItems.length})</h3>
-                <button
-                  className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
-                  onClick={handleClearCart}
-                >
-                  Clear Cart
-                </button>
+                
               </div>
               <div className="px-6 py-4">
                 <div className="space-y-4">
@@ -311,14 +306,14 @@ const handleAddItem = async (variantId: number) => {
                       <div className="flex items-center space-x-2">
                         <button
                           className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
-                          onClick={() => handleRemoveItem(item.variantId)}
+                          onClick={() => handleRemoveItem(item.productId,item.variantId)}
                         >
                           -
                         </button>
                         <span className="w-8 text-center">{item.amount}</span>
                         <button
                           className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
-                          onClick={() => handleAddItem(item.variantId)}
+                          onClick={() => handleAddItem(item.productId, item.variantId)}
                         >
                           +
                         </button>
@@ -447,9 +442,9 @@ const handleAddItem = async (variantId: number) => {
                       value={shippingInfo.country}
                       onChange={(e) => setShippingInfo({ ...shippingInfo, country: e.target.value })}
                     >
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="UK">United Kingdom</option>
+                      <option value="NO">Norge</option>
+                      <option value="SE">Svergie</option>
+          
                     </select>
                   </div>
                 </div>
@@ -462,7 +457,7 @@ const handleAddItem = async (variantId: number) => {
                 <h3 className="text-lg font-semibold">Shipping Method</h3>
               </div>
               <div className="px-6 py-4">
-                <div value={shippingMethod} onChange={setShippingMethod}>
+                <div>
                   <div className="flex items-center space-x-2 p-3 border rounded">
                     <input
                       type="radio"

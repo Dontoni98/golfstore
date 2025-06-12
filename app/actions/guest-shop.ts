@@ -17,41 +17,49 @@ function saveCartToStorage(cart: CartItem[]) {
   }
 }
 
-export function fetchCart(): CartItem[] {
-  return getCartFromStorage();
+export function fetchCart(): { shoppingcartItems: CartItem[] } {
+  return {
+    shoppingcartItems: getCartFromStorage()
+  }
 }
 
+
 export function updateCartItem(
-  variantId: number,
-  amount: number = 1,
-  action: "add" | "subtract" | "delete" = "add"
+  fullItem: {
+    variantId: number;
+    productId: number;
+    productName: string;
+    price: number;
+    imageUrl: string;
+  },
+  action: "add" | "subtract" | "delete" = "add",
+  amount: number = 1
 ): CartItem[] {
   let cart = getCartFromStorage();
-
-  const index = cart.findIndex((item) => item.variantId === variantId);
+  const index = cart.findIndex((item) => item.variantId === fullItem.variantId);
 
   if (action === "add") {
     if (index !== -1) {
       cart[index].amount += amount;
     } else {
-      cart.push({ variantId, amount });
+      cart.push({
+        ...fullItem,
+        amount,
+      });
     }
   } else if (action === "subtract") {
     if (index !== -1) {
       cart[index].amount -= amount;
-      if (cart[index].amount <= 0) {
-        cart.splice(index, 1);
-      }
+      if (cart[index].amount <= 0) cart.splice(index, 1);
     }
   } else if (action === "delete") {
-    if (index !== -1) {
-      cart.splice(index, 1);
-    }
+    if (index !== -1) cart.splice(index, 1);
   }
 
   saveCartToStorage(cart);
   return cart;
 }
+
 
 export function clearCart(): void {
   if (typeof window !== "undefined") {

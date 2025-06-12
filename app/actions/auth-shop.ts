@@ -24,12 +24,12 @@ export async function fetchCart() {
     throw new Error(`Failed to fetch cart: ${res.statusText}`)
   }
 
-  return await res.json()
+    return await res.json()
 }
 
 export async function updateCartItem(
+  productId: number,
   variantId: number,
-  amount: number = 1,
   action: "add" | "subtract" | "delete" = "add"
 ) {
   if (!keycloak) throw new Error("Keycloak not initialized");
@@ -44,9 +44,9 @@ export async function updateCartItem(
   if (!keycloak.token) throw new Error("Not authenticated");
 
   const body = {
-    action,
+    productId,
     variantId,
-    amount,
+    action,
   };
 
   const res = await fetch(`${API_BASE}/AlterShoppingCart`, {
@@ -65,8 +65,7 @@ export async function updateCartItem(
   return await res.json();
 }
 
-
-export async function clearCart(variantId: number,) {
+export async function clearCart(variantId: number) {
   if (!keycloak) throw new Error("Keycloak not initialized");
 
   // Prøv å fornye tokenet hvis det snart går ut
@@ -75,13 +74,13 @@ export async function clearCart(variantId: number,) {
   } catch (err) {
     throw new Error("Failed to refresh token");
   }
-  
-  if (!keycloak?.token) throw new Error("Not authenticated")
+
+  if (!keycloak?.token) throw new Error("Not authenticated");
 
   const body = {
     action: "delete",
     variantId: variantId,
-  }
+  };
 
   const res = await fetch(`${API_BASE}/AlterShoppingCart`, {
     method: "PATCH",

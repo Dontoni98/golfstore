@@ -60,9 +60,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </CardContent>
       </Link>
       <CardFooter className="p-4 pt-0">
-        <Button onClick={handleAddToCartClick} className="w-full">
-          Se produkt
-        </Button>
+        <Link href={`/products/${id}`} className="w-full">
+          <Button className="w-full">
+            Se produkt
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
