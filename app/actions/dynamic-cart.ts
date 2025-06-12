@@ -11,12 +11,12 @@ export const fetchCart = () => {
 
 export const updateCartItem = (
   variantId: number,
-  amount: number = 1,
+  productId: number,
   action: "add" | "subtract" | "delete" = "add"
 ) => {
   return isLoggedIn()
-    ? authCart.updateCartItem(variantId, amount, action)
-    : guestCart.updateCartItem(variantId, amount, action)
+    ? authCart.updateCartItem(variantId, productId, action)
+    : guestCart.updateCartItem(variantId, productId,action)
 }
 
 export const clearCart = (variantId?: number) => {

@@ -64,6 +64,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     loadCart()
+    console.log(fetchCart())
   }, [])
 
   const loadCart = async () => {
