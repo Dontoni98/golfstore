@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import DebugTest from './components/DebugTest';
 import LogoutButton from '../sign-in/components/LogoutButton';
 
 const page = () => {

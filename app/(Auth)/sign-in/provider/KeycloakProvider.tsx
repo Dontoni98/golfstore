@@ -1,9 +1,8 @@
 // app/providers/keycloak-provider.tsx
 "use client";
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { initKeycloak, logout, testDebugEndpoints } from "../config/keycloak"; // Fixed path
+import { initKeycloak, logout } from "../config/keycloak"; // Fixed path
 import keycloak from "../config/keycloak"; // Fixed path
-import test from "node:test";
 
 type User = {
   name?: string;
@@ -15,15 +14,13 @@ interface KeycloakContextType {
   authenticated: boolean;
   user: User;
   logout: () => void;
-  testDebug: () => Promise<void>;
 }
 
 const KeycloakContext = createContext<KeycloakContextType>({
   initialized: false,
   authenticated: false,
   user: null,
-  logout: () => {},
-  testDebug: async () => {},
+  logout: () => {}
 });
 
 interface Props {
@@ -59,8 +56,7 @@ export const KeycloakProvider: React.FC<Props> = ({ children }) => {
         initialized,
         authenticated,
         user,
-        logout,
-        testDebug: testDebugEndpoints
+        logout
       }}
     >
       {children}

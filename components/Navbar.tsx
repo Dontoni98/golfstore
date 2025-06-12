@@ -8,9 +8,7 @@ import Search from "./Search";
 import keycloak, {
   logout,
   initKeycloak,
-  testDebugEndpoints,
 } from "@/app/(Auth)/sign-in/config/keycloak";
-import test from "node:test";
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
