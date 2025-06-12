@@ -63,13 +63,16 @@ export default function SearchResults() {
 
       {/* Hvis vi ikke finner noe*/}
       {results.length === 0 ? (
+        <div className = "min-h-[60vh] flex items-center justify-center">
         <p>Ingen produkter funnet.</p>
+        </div>
       ) : (
         // Hvis produkter blir funnet, vis dem som produktkort
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-grow">
           {results.map((p) => (
-            <Link key={p.productId} href={`/products/${p.productId}`} className="block">
-              <Card className="max-w-xs hover:shadow-lg transition-shadow">
+            <Card key ={p.productId} className="max-w-xs hover:shadow-lg transition-shadow">
+              {/* Link må ligge inne i Card slik at det ikke skjer konflikter med klikk-området eller hovereffekter */}
+              <Link href ={`/products/${p.productId}`} className="block h-full"> 
                 <CardHeader>
                   <CardTitle>{p.productName}</CardTitle>
                 </CardHeader>
@@ -86,8 +89,8 @@ export default function SearchResults() {
                   <span className="font-medium">{p.price} NOK</span>
                   <Button size="sm">Kjøp</Button>
                 </CardFooter>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           ))}
         </div>
       )}

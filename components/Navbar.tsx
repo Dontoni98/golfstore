@@ -122,19 +122,19 @@ const Navbar = () => {
               ) : (
                 <button
                   onClick={() => keycloak?.login()}
-                  className="text-gray-300 hover:text-white"
+                  className="flex flex-col items-center text-gray-300 hover:text-white transform transition duration-200 hover:-translate-y-[2px] mt-4"
                 >
                   <User className="h-6 w-6" />
-                  <span className="sr-only">Logg inn</span>
+                  <span className="text-xs mt-1">Logg inn</span>
                 </button>
               )}
 
               <Link
                 href="/shoppingCart"
-                className="text-gray-300 hover:text-white"
+                className="flex flex-col items-center text-gray-300 hover:text-white transform transition duration-200 hover:-translate-y-[2px] mt-4"
               >
                 <ShoppingCart className="h-6 w-6" />
-                <span className="sr-only">Shopping Cart</span>
+                <span className="text-xs mt-1">Handlekurv</span>
               </Link>
             </div>
           </div>
