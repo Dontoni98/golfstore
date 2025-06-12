@@ -10,14 +10,23 @@ export const fetchCart = () => {
 }
 
 export const updateCartItem = (
-  productId: number,
-  variantId: number,
+  productIdOrItem: number | {
+    variantId: number;
+    productId: number;
+    productName: string;
+    price: number;
+    imageUrl: string;
+  },
+  variantId?: number,
   action: "add" | "subtract" | "delete" = "add"
 ) => {
-  return isLoggedIn()
-    ? authCart.updateCartItem(productId, variantId, action)
-    : guestCart.updateCartItem(variantId, action)
+  if (isLoggedIn()) {
+    return authCart.updateCartItem(productIdOrItem as number, variantId!, action)
+  } else {
+    return guestCart.updateCartItem(productIdOrItem as any, action)
+  }
 }
+
 
 export const clearCart = (variantId?: number) => {
   return isLoggedIn()
