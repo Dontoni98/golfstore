@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { fetchCart, updateCartItem, clearCart } from "@/app/actions/shop"
+import { fetchCart, updateCartItem, clearCart } from "@/app/actions/dynamic-cart"
 
 
 interface CartItem {
@@ -106,14 +106,15 @@ const handleAddItem = async (variantId: number) => {
 }
 
 
-  const handleClearCart = async (variantId: number) => {
-    try {
-      await clearCart(variantId) // Clear all items
-      await loadCart()
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to clear cart")
-    }
+  const handleClearCart = async (variantId?: number) => {
+  try {
+    await clearCart(variantId)
+    await loadCart()
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "Failed to clear cart")
   }
+}
+
 
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.amount, 0)

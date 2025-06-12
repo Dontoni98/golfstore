@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { updateCartItem } from "@/app/actions/shop";
+import { updateCartItem } from "@/app/actions/auth-shop";
 
 // Grensesnitt for attributter som beskriver en variant (f.eks. størrelse, farge)
 interface VariantAttribute {
