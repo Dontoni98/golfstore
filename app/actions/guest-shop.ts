@@ -23,35 +23,31 @@ export function fetchCart(): CartItem[] {
 
 export function updateCartItem(
   variantId: number,
-  amount: number = 1,
-  action: "add" | "subtract" | "delete" = "add"
+  action: "add" | "subtract" | "delete" = "add",
+  amount: number = 1 // valgfritt
 ): CartItem[] {
-  let cart = getCartFromStorage();
-
-  const index = cart.findIndex((item) => item.variantId === variantId);
+  let cart = getCartFromStorage()
+  const index = cart.findIndex((item) => item.variantId === variantId)
 
   if (action === "add") {
     if (index !== -1) {
-      cart[index].amount += amount;
+      cart[index].amount += amount
     } else {
-      cart.push({ variantId, amount });
+      cart.push({ variantId, amount })
     }
   } else if (action === "subtract") {
     if (index !== -1) {
-      cart[index].amount -= amount;
-      if (cart[index].amount <= 0) {
-        cart.splice(index, 1);
-      }
+      cart[index].amount -= amount
+      if (cart[index].amount <= 0) cart.splice(index, 1)
     }
   } else if (action === "delete") {
-    if (index !== -1) {
-      cart.splice(index, 1);
-    }
+    if (index !== -1) cart.splice(index, 1)
   }
 
-  saveCartToStorage(cart);
-  return cart;
+  saveCartToStorage(cart)
+  return cart
 }
+
 
 export function clearCart(): void {
   if (typeof window !== "undefined") {

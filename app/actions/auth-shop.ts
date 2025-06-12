@@ -28,8 +28,8 @@ export async function fetchCart() {
 }
 
 export async function updateCartItem(
+  productId: number,
   variantId: number,
-  amount: number = 1,
   action: "add" | "subtract" | "delete" = "add"
 ) {
   if (!keycloak) throw new Error("Keycloak not initialized");
@@ -43,11 +43,11 @@ export async function updateCartItem(
 
   if (!keycloak.token) throw new Error("Not authenticated");
 
-  const body = {
-    action,
+    const body = {
+    productId,
     variantId,
-    amount,
-  };
+    action,
+  }
 
   const res = await fetch(`${API_BASE}/AlterShoppingCart`, {
     method: "PATCH",
@@ -56,14 +56,13 @@ export async function updateCartItem(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
-  });
+  })
 
   if (!res.ok) {
-    throw new Error(`Failed to ${action} item: ${res.statusText}`);
+    throw new Error(`Failed to ${action} item: ${res.statusText}`)
   }
 
-  return await res.json();
-}
+  return await res.json()
 
 
 export async function clearCart(variantId: number,) {

@@ -86,22 +86,21 @@ export default function CheckoutPage() {
   }
 }
 
-const handleRemoveItem = async (variantId: number) => {
+const handleAddItem = async (productId: number, variantId: number) => {
   try {
-    await updateCartItem(variantId, 1, "subtract")
-    await loadCart()
-  } catch (err) {
-    setError(err instanceof Error ? err.message : "Failed to remove item")
-  }
-}
-
-
-const handleAddItem = async (variantId: number) => {
-  try {
-    await updateCartItem(variantId, 1, "add")
+    await updateCartItem(productId, variantId, "add")
     await loadCart()
   } catch (err) {
     setError(err instanceof Error ? err.message : "Failed to add item")
+  }
+}
+
+const handleRemoveItem = async (productId: number, variantId: number) => {
+  try {
+    await updateCartItem(productId, variantId, "subtract")
+    await loadCart()
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "Failed to remove item")
   }
 }
 
@@ -311,14 +310,14 @@ const handleAddItem = async (variantId: number) => {
                       <div className="flex items-center space-x-2">
                         <button
                           className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
-                          onClick={() => handleRemoveItem(item.variantId)}
+                          onClick={() => handleRemoveItem(item.variantId,item.productId)}
                         >
                           -
                         </button>
                         <span className="w-8 text-center">{item.amount}</span>
                         <button
                           className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
-                          onClick={() => handleAddItem(item.variantId)}
+                          onClick={() => handleAddItem(item.variantId,item.productId)}
                         >
                           +
                         </button>
