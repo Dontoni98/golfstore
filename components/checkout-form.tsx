@@ -23,7 +23,7 @@ export function CheckoutForm({ onSubmit, isProcessing }: CheckoutFormProps) {
     city: "",
     state: "",
     zipCode: "",
-    country: "United States",
+    country: "Norge",
     
     // Payment Information
     cardNumber: "",
@@ -31,7 +31,7 @@ export function CheckoutForm({ onSubmit, isProcessing }: CheckoutFormProps) {
     cvv: "",
     cardName: "",
     
-    // Billing same as shipping
+    // Billing same as shippinṣ
     billingSameAsShipping: true,
   })
 
