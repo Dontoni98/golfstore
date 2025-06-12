@@ -201,7 +201,7 @@ export default function ProductDetailPage() {
                 }}
                 className="w-full md:w-auto"
               >
-                Add to Cart
+                Legg til handlekurv
               </Button>
             </div>
           </div>
